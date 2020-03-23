@@ -8,5 +8,5 @@ def test_config():
     assert flask_adventure_game.create_app({'TESTING': True}).testing
 
 def test_hello(client):
-    response = client.get('/hello')
+    response = client.get('/')
     assert response.data == b'Hello, World!'
