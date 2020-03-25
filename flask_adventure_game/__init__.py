@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 
 
 def create_app(test_config=None):
@@ -24,18 +24,15 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
+#Index
     @app.route('/')
-    def hello():
-        return 'Hello, World!'
-    
+    def index():
+        return render_template('index.html')
+
     from . import db
     db.init_app(app)
 
     from . import auth
     app.register_blueprint(auth.bp)
-
-    from . import db
-    db.init_app(app)
 
     return app
