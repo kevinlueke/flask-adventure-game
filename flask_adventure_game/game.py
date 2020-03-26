@@ -6,4 +6,4 @@ bp = Blueprint('game', __name__, url_prefix='/game')
 #Introduction
 @bp.route('/intro')
 def intro():
-    return 'Hello, World!'
+    return render_template('intro.html', area=intro)
