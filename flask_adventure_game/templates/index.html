@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Index{% endblock %}</h1>
+{% block content %}
+<p>Wlecome to game. Some game stuff. Press play to start the game</p>
+<a href="{{ url_for('game.intro') }}">Play</a>
 {% endblock %}
 
-{% block content %}
-  <p>Some content. Login, register, logout</p>
-{% endblock %}

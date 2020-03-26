@@ -29,7 +29,7 @@ def create_app(test_config=None):
         return render_template('index.html')
 
 
-    #from . import auth
-    #app.register_blueprint(auth.bp)
+    from . import game
+    app.register_blueprint(game.bp)
 
     return app
