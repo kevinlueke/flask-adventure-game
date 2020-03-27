@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+  font-size: 20px;
+  background-color: black;
+  color: white;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  max-width: 960px;
+  margin: 0 auto;
+
+}
+
+nav {
+  background-color: grey;
+  display:flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}
+
