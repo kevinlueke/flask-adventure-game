@@ -12,7 +12,7 @@ def index():
 
 #@bp.route('/help', methods=('GET', 'POST'))
     
-def dir(valid_actions, action, current_scene):
+def dir(valid_actions, action):
     
     # Allows help to be available whenever a player needs to know controls
     if action == 'help':
@@ -75,7 +75,7 @@ def aghrial():
         if request.method=='POST':
             action = request.form['action']
             #try: 
-            current_scene = dir(('w',), action, current_scene)
+            current_scene = dir(('w',), action)
                 #variable for the tuple
             #except HelpError:
                 #they type help
@@ -83,7 +83,59 @@ def aghrial():
                 #they donti flsh this one
 
             if current_scene == 'w':
-                current_scene = "The door you came out of slammed shut behind you and disappeared"
+                return redirect(url_for('game.cabin'))
+        return render_template('index.html', scene=current_scene)
+
+
+@bp.route('/cabin', methods=('GET', 'POST'))
+def cabin():
+    current_scene = "The door you came out of slammed shut behind you and disappeared. You are standing in the entrance of a cabin, to your right there is a bathroom, behind you is a bedroom, in front of you is a door to leave the cabin"
+    if request.method=='POST':
+        action = request.form['action']
+        current_scene = dir(('w', 'd', 's'), action)
+        if action == 'w':
+            return redirect(url_for('game.outside_cabin'))
+        elif action == 'd':
+            return redirect(url_for('game.bathroom'))
+        elif action == 's':
+            return redirect(url_for('game.bedroom'))
+ 
+    return render_template('index.html', scene=current_scene)
+
+
+
+@bp.route('/bedroom', methods=('GET', 'POST'))
+def bedroom():
+        current_scene= "The bedroom is messy, do you clean it for +5 mp?"
+        if request.method=='POST':
+            action = request.form['action']
+            current_scene = dir(('yes', 'no'), action)
+            if current_scene == 'yes':
+                current_scene = "You cleaned the bedroom and got 5 mp"
+                return render_template('index.html', scene=current_scene)
+            elif current_scene == 'no':
+                current_scene = "You didnt clean the bedroom"
                 return render_template('index.html', scene=current_scene)
         return render_template('index.html', scene=current_scene)
 
+
+@bp.route('/bathroom', methods=('GET', 'POST'))
+def bathroom():
+        current_scene = "There is a bottle of Xeron Elixir in the bathroom, the label is scraped off, you don't know what it'll do, do you steal it for -5 mp?"
+        if request.method=='POST':
+            action = request.form['action']
+            current_scene = dir(('yes', 'no'), action)
+            if current_scene == 'yes':
+                current_scene = "After taking the elixir your whole body feels amazing"
+                return render_template('index.html', scene=current_scene)
+            elif current_scene == 'no':
+                current_scene = "You refrained from stealing"
+                return render_template('index.html', scene=current_scene)
+        return render_template('index.html', scene=current_scene)
+
+@bp.route('/outside-cabin', methods=('GET', 'POST'))
+def outside_cabin():
+    current_scene = "It's a beautiful sunny day outside, to your left is a river, to your right is the woods, straight ahead is a village This is it of game developed so far"
+    if request.method=='POST':
+        action = request.form['action']
+    return render_template('index.html', scene=current_scene)
