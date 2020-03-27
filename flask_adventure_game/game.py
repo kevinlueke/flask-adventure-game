@@ -82,7 +82,7 @@ def aghrial():
             #except ValueError:
                 #they donti flsh this one
 
-            current_scene == 'w':
+            if current_scene == 'w':
                 current_scene = "The door you came out of slammed shut behind you and disappeared"
                 return render_template('index.html', scene=current_scene)
         return render_template('index.html', scene=current_scene)
