@@ -5,9 +5,11 @@
   <h1>The Trials of Aghrial</h1>
 </nav>
 <section class="content">
-  <header>
-    {% for message in get_flashed_messages() %}
-      <div class="flash">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
+{% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+{% endfor %}
+{% block content %}
+  <p>Click play to start</p>
+  <a href="{{ url_for('game.aghrial') }}">Click to play</a>
+{% endblock %}
 </section>

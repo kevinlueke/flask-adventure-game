@@ -22,12 +22,10 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-#Index
+    
     @app.route('/')
-    def index():
-        return render_template('index.html')
-
+    def base():
+        return render_template('base.html')
 
     from . import game
     app.register_blueprint(game.bp)
